@@ -2,132 +2,52 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Studio Chanson IA</title>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;800&family=Instrument+Sans:wght@400;600&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Musique IA - AVS PROD</title>
 <style>
-:root{--bg:#F4F1FB;--ink:#1B1033;--mut:#5B5275;--card:#FFFFFF;--line:#D9D2EC;--sun:#F2A900;--sunink:#1B1033;--red:#C93A1E;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#150C2B;--ink:#F4EEFF;--mut:#B3A8D1;--card:#21163F;--line:#3A2C63;--sun:#FFC93C;--sunink:#1B1033;--red:#FF7A59;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#150C2B;--ink:#F4EEFF;--mut:#B3A8D1;--card:#21163F;--line:#3A2C63;--sun:#FFC93C;--sunink:#1B1033;--red:#FF7A59;color-scheme:dark}
-*,*::before,*::after{box-sizing:inherit}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:"Instrument Sans",system-ui,sans-serif;line-height:1.55}
-main{max-width:640px;margin:0 auto;padding:20px 18px 48px}
-h1,h2{font-family:"Bricolage Grotesque",system-ui,sans-serif;line-height:1.05;margin:0}
-h1{font-size:clamp(2.3rem,9vw,3.6rem);font-weight:800;letter-spacing:-.02em;margin:18px 0 12px}
-h2{font-size:1.35rem;font-weight:800}
-.lead{color:var(--mut);font-size:1.05rem;margin:0 0 20px;max-width:34ch}
-.eq{display:flex;align-items:flex-end;gap:5px;height:64px}
-.eq i{flex:1;max-width:14px;background:var(--sun);border-radius:3px 3px 0 0;height:100%;transform-origin:bottom;animation:bounce 1.1s ease-in-out infinite alternate}
-.eq i:nth-child(3n){background:var(--red)}
-@keyframes bounce{from{transform:scaleY(.15)}to{transform:scaleY(1)}}
-@media (prefers-reduced-motion:reduce){.eq i{animation:none;transform:scaleY(.6)}}
-form{display:grid;gap:14px;margin:26px 0}
-label{display:grid;gap:6px;font-weight:600;font-size:.95rem}
-input,select,textarea{font:inherit;color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:10px;padding:12px;width:100%}
-textarea{min-height:84px;resize:vertical}
-:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
-button,.btn{font:inherit;font-weight:600;cursor:pointer;border-radius:999px;border:0;padding:14px 22px;background:var(--sun);color:var(--sunink);text-decoration:none;display:inline-block;text-align:center}
-button.ghost,.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
-button:disabled{opacity:.6;cursor:wait}
-#err{color:var(--red);font-weight:600;margin:0}
-.res{display:none;gap:18px;margin-top:8px}
-.res.on{display:grid}
-.box{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:16px}
-.box pre{white-space:pre-wrap;word-wrap:break-word;font:inherit;margin:10px 0 14px}
-.row{display:flex;flex-wrap:wrap;gap:10px}
-.small{color:var(--mut);font-size:.9rem;margin:0 0 12px}
-.brand{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:800;font-size:1.3rem;letter-spacing:.02em;margin:0 0 14px;color:var(--ink)}
-.brand span{background:var(--sun);color:var(--sunink);padding:2px 10px;border-radius:6px}
-footer{margin-top:34px;padding-top:20px;border-top:1.5px solid var(--line)}
-footer p{margin:0 0 12px}
-.tarifs{margin-top:34px}
-.tarifs dl{margin:14px 0 0;border:1.5px solid var(--line);border-radius:14px;background:var(--card);overflow:hidden}
-.tarifs .t{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:14px 16px}
-.tarifs .t+.t{border-top:1.5px solid var(--line)}
-.tarifs dt{font-weight:600}
-.tarifs dd{margin:0;font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:800;white-space:nowrap;color:var(--red)}
+body{font-family:Arial,sans-serif;margin:0;padding:20px;background:#F4F1FB;color:#1B1033}
+main{max-width:600px;margin:0 auto}
+textarea{width:100%;padding:10px;font-size:16px;box-sizing:border-box}
+button{margin-top:10px;padding:12px 20px;font-size:16px}
 </style>
 </head>
 <body>
 <main>
-<p class="brand"><span>AVS PROD</span></p>
-<div class="eq" aria-hidden="true" id="eq"></div>
-<h1>Décris la fête. On écrit la chanson.</h1>
-<p class="lead">Paroles, style musical et consigne de voix prêts à coller dans un générateur d’IA.</p>
-
-<form id="f">
-<label>Pour qui est la chanson ?
-<input id="nom" required placeholder="Ex. DJ Cygoss, Awa, mon père…"></label>
-<label>Occasion
-<select id="occ"><option>Publicité / promotion</option><option>Anniversaire</option><option>Mariage</option><option>Baptême</option><option>Hommage</option><option>Simple plaisir</option></select></label>
-<label>Style musical
-<select id="sty"><option>Coupé-décalé</option><option>Afrobeat</option><option>Amapiano</option><option>Zouk</option><option>Gospel</option><option>Rap</option><option>Reggae</option></select></label>
-<label>Langue
-<select id="lng"><option>Français</option><option>Français avec quelques mots en fon</option><option>Anglais</option></select></label>
-<label>Détails à inclure (ville, services, numéro, qualités)
-<textarea id="det" placeholder="Ex. de Colli Gandomè, anime les mariages et baptêmes"></textarea></label>
-<label>Code d’accès
-<input id="code" type="password" required autocomplete="off" placeholder="Code donné par AVS PROD"></label>
-<button type="submit" id="go">Créer ma chanson</button>
-<p id="err" role="alert"></p>
-</form>
-
-<section class="res" id="res" aria-live="polite">
-<div class="box"><h2>Paroles</h2><pre id="par"></pre><button class="ghost" data-c="par">Copier les paroles</button></div>
-<div class="box"><h2>Style musical</h2><p class="small">À coller dans le champ « style » d’un générateur de musique.</p><pre id="mus"></pre><button class="ghost" data-c="mus">Copier le style</button></div>
-<div class="box"><h2>Voix</h2><p class="small">À coller dans un générateur de voix.</p><pre id="voi"></pre><button class="ghost" data-c="voi">Copier la consigne</button></div>
-<div class="box"><h2>Musique</h2><p class="small">Génère un extrait de 30 secondes avec le style ci-dessus.</p>
-<button id="gen">Générer la musique</button><p id="gerr" role="alert" style="color:var(--red);font-weight:600"></p><audio id="aud" controls style="width:100%;margin-top:10px;display:none"></audio></div>
-<div class="box"><h2>Ou génère ailleurs</h2><p class="small">Ces services ont chacun leurs limites gratuites.</p>
-<div class="row"><a class="btn" href="https://suno.com" target="_blank" rel="noopener">Musique : Suno</a><a class="btn ghost" href="https://elevenlabs.io" target="_blank" rel="noopener">Voix : ElevenLabs</a><a class="btn ghost" href="https://huggingface.co/spaces/facebook/MusicGen" target="_blank" rel="noopener">Gratuit : MusicGen</a></div></div>
-</section>
-<section class="tarifs">
-<h2>Tarifs AVS PROD</h2>
-<dl>
-<div class="t"><dt>Paroles seules</dt><dd>1&nbsp;000 FCFA</dd></div>
-<div class="t"><dt>Jingle publicitaire de 30 secondes</dt><dd>2&nbsp;500 FCFA</dd></div>
-<div class="t"><dt>Chanson complète (paroles, musique et voix)</dt><dd>4&nbsp;000 FCFA</dd></div>
-<div class="t"><dt>Chanson d’anniversaire ou de mariage</dt><dd>5&nbsp;000 FCFA</dd></div>
-<div class="t"><dt>Pack publicité (jingle et chanson complète)</dt><dd>6&nbsp;500 FCFA</dd></div>
-</dl>
-</section>
-<footer>
-<p><strong>AVS PROD</strong><br>Une chanson sur mesure pour ta fête ou ton activité ? Contacte-nous.</p>
-<div class="row"><a class="btn" href="https://wa.me/22995892887" target="_blank" rel="noopener">Écrire sur WhatsApp</a><a class="btn ghost" href="tel:+22995892887">Appeler +229 95 89 28 87</a></div>
-</footer>
+  <h1>Crée ta musique avec l'IA</h1>
+  <textarea id="mus-prompt" rows="3" placeholder="Ex : afro beat joyeux avec tam-tam et guitare"></textarea>
+  <button id="mus-btn">Créer la musique</button>
+  <p id="mus-statut"></p>
+  <audio id="mus-lecteur" controls style="display:none;width:100%"></audio>
+  <a id="mus-lien" style="display:none" download="musique-avs-prod.flac">Télécharger</a>
 </main>
+
 <script>
-var eq=document.getElementById("eq");
-for(var i=0;i<24;i++){var b=document.createElement("i");b.style.animationDelay=(i*0.07)+"s";b.style.animationDuration=(0.7+(i%5)*0.15)+"s";eq.appendChild(b);}
-var $=function(id){return document.getElementById(id)};
-document.querySelectorAll("[data-c]").forEach(function(btn){btn.addEventListener("click",function(){
-  var t=$(btn.getAttribute("data-c")).textContent,old=btn.textContent;
-  try{navigator.clipboard.writeText(t).then(function(){btn.textContent="Copié";setTimeout(function(){btn.textContent=old},1500)},function(){btn.textContent="Copie impossible"})}catch(e){btn.textContent="Copie impossible"}
-});});
-$("f").addEventListener("submit",async function(e){
-  e.preventDefault();
-  $("err").textContent="";
-  var go=$("go");go.disabled=true;go.textContent="Écriture en cours…";
-  try{
-    var rep=await fetch("/api/paroles",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({code:$("code").value,nom:$("nom").value,occasion:$("occ").value,style:$("sty").value,langue:$("lng").value,details:$("det").value})});
-    if(!rep.ok){throw new Error(await rep.text())}
-    var r=await rep.json();
-    $("par").textContent=r.paroles;$("mus").textContent=r.style_musical;$("voi").textContent=r.voix;
-    $("res").classList.add("on");$("res").scrollIntoView({behavior:"smooth"});
-  }catch(x){
-    $("err").textContent=x&&x.message?x.message:"La chanson n’a pas pu être écrite. Réessaie.";
+const musBtn = document.getElementById("mus-btn");
+musBtn.addEventListener("click", async () => {
+  const prompt = document.getElementById("mus-prompt").value.trim();
+  const statut = document.getElementById("mus-statut");
+  const lecteur = document.getElementById("mus-lecteur");
+  const lien = document.getElementById("mus-lien");
+  if (!prompt) { statut.textContent = "Écris d'abord une description."; return; }
+  musBtn.disabled = true;
+  statut.textContent = "Création en cours… (30 à 60 secondes)";
+  try {
+    const res = await fetch("/.netlify/functions/music", {
+      method: "POST",
+      body: JSON.stringify({ prompt }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || "Erreur");
+    const url = "data:" + data.type + ";base64," + data.audio;
+    lecteur.src = url;
+    lecteur.style.display = "block";
+    lien.href = url;
+    lien.style.display = "inline";
+    statut.textContent = "Ta musique est prête !";
+  } catch (e) {
+    statut.textContent = "Erreur : " + e.message + " (réessaie dans une minute)";
   }
-  go.disabled=false;go.textContent="Créer ma chanson";
-});
-$("gen").addEventListener("click",async function(){
-  var g=$("gen");$("gerr").textContent="";g.disabled=true;g.textContent="Création en cours…";
-  try{
-    var rep=await fetch("/api/musique",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({code:$("code").value,prompt:$("mus").textContent,secondes:30})});
-    if(!rep.ok){throw new Error(await rep.text())}
-    var blob=await rep.blob();var a=$("aud");a.src=URL.createObjectURL(blob);a.style.display="block";a.play();
-  }catch(x){$("gerr").textContent=x&&x.message?x.message:"La musique n’a pas pu être créée. Réessaie."}
-  g.disabled=false;g.textContent="Générer la musique";
+  musBtn.disabled = false;
 });
 </script>
 </body>
