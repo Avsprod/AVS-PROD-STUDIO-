@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Musique IA - AVS PROD</title>
+<style>
+body{font-family:Arial,sans-serif;margin:0;padding:20px;background:#F4F1FB;color:#1B1033}
+main{max-width:600px;margin:0 auto}
+textarea{width:100%;padding:10px;font-size:16px;box-sizing:border-box}
+button{margin-top:10px;padding:12px 20px;font-size:16px}
+</style>
+</head>
+<body>
+<main>
+  <h1>Crée ta musique avec l'IA</h1>
+  <textarea id="mus-prompt" rows="3" placeholder="Ex : afro beat joyeux avec tam-tam et guitare"></textarea>
+  <button id="mus-btn">Créer la musique</button>
+  <p id="mus-statut"></p>
+  <audio id="mus-lecteur" controls style="display:none;width:100%"></audio>
+  <a id="mus-lien" style="display:none" download="musique-avs-prod.flac">Télécharger</a>
+</main>
+
+<script>
+const musBtn = document.getElementById("mus-btn");
+musBtn.addEventListener("click", async () => {
+  const prompt = document.getElementById("mus-prompt").value.trim();
+  const statut = document.getElementById("mus-statut");
+  const lecteur = document.getElementById("mus-lecteur");
+  const lien = document.getElementById("mus-lien");
+  if (!prompt) { statut.textContent = "Écris d'abord une description."; return; }
+  musBtn.disabled = true;
+  statut.textContent = "Création en cours… (30 à 60 secondes)";
+  try {
+    const res = await fetch("/.netlify/functions/music", {
+      method: "POST",
+      body: JSON.stringify({ prompt }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || "Erreur");
+    const url = "data:" + data.type + ";base64," + data.audio;
+    lecteur.src = url;
+    lecteur.style.display = "block";
+    lien.href = url;
+    lien.style.display = "inline";
+    statut.textContent = "Ta musique est prête !";
+  } catch (e) {
+    statut.textContent = "Erreur : " + e.message + " (réessaie dans une minute)";
+  }
+  musBtn.disabled = false;
+});
+</script>
+</body>
+</html>
