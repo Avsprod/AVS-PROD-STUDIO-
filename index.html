@@ -1,0 +1,38 @@
+<section id="studio">
+  <h2>Crée ta musique avec l'IA</h2>
+  <textarea id="prompt" rows="3" placeholder="Ex : afro beat joyeux avec tam-tam et guitare"></textarea>
+  <button id="btn">Créer la musique</button>
+  <p id="statut"></p>
+  <audio id="lecteur" controls style="display:none;width:100%"></audio>
+  <a id="telecharger" style="display:none" download="musique-avs-prod.flac">Télécharger</a>
+</section>
+
+<script>
+const btn = document.getElementById("btn");
+btn.addEventListener("click", async () => {
+  const prompt = document.getElementById("prompt").value.trim();
+  const statut = document.getElementById("statut");
+  const lecteur = document.getElementById("lecteur");
+  const lien = document.getElementById("telecharger");
+  if (!prompt) { statut.textContent = "Écris d'abord une description."; return; }
+  btn.disabled = true;
+  statut.textContent = "Création en cours… (30 à 60 secondes)";
+  try {
+    const res = await fetch("/.netlify/functions/music", {
+      method: "POST",
+      body: JSON.stringify({ prompt }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || "Erreur");
+    const url = `data:${data.type};base64,${data.audio}`;
+    lecteur.src = url;
+    lecteur.style.display = "block";
+    lien.href = url;
+    lien.style.display = "inline";
+    statut.textContent = "Ta musique est prête !";
+  } catch (e) {
+    statut.textContent = "Erreur : " + e.message + " (réessaie dans une minute)";
+  }
+  btn.disabled = false;
+});
+</script>
