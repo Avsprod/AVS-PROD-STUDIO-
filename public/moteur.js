@@ -69,7 +69,7 @@
     bouton.style.pointerEvents = "none";
     zone.textContent = "Patiente 30 à 60 secondes…";
     try {
-      var res = await fetch("/.netlify/functions/music", {
+      var res = await fetch("/.netlify/functions/musique", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt: construirePrompt() })
