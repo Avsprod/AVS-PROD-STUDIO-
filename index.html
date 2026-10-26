@@ -1,38 +1,91 @@
-<section id="studio">
-  <h2>Crée ta musique avec l'IA</h2>
-  <textarea id="prompt" rows="3" placeholder="Ex : afro beat joyeux avec tam-tam et guitare"></textarea>
-  <button id="btn">Créer la musique</button>
-  <p id="statut"></p>
-  <audio id="lecteur" controls style="display:none;width:100%"></audio>
-  <a id="telecharger" style="display:none" download="musique-avs-prod.flac">Télécharger</a>
-</section>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVS-PROD-STUDIO</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
+            min-height: 100vh;
+        }
+        header {
+            padding: 2rem;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2.5rem;
+            color: #00d9ff;
+            margin-bottom: 0.5rem;
+        }
+        p {
+            font-size: 1.2rem;
+            color: #ccc;
+        }
+        section {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .card {
+            background: rgba(255,255,255,0.05);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #00d9ff;
+        }
+        h2 {
+            color: #00d9ff;
+            margin-bottom: 1rem;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #777;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
 
-<script>
-const btn = document.getElementById("btn");
-btn.addEventListener("click", async () => {
-  const prompt = document.getElementById("prompt").value.trim();
-  const statut = document.getElementById("statut");
-  const lecteur = document.getElementById("lecteur");
-  const lien = document.getElementById("telecharger");
-  if (!prompt) { statut.textContent = "Écris d'abord une description."; return; }
-  btn.disabled = true;
-  statut.textContent = "Création en cours… (30 à 60 secondes)";
-  try {
-    const res = await fetch("/.netlify/functions/music", {
-      method: "POST",
-      body: JSON.stringify({ prompt }),
-    });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error || "Erreur");
-    const url = `data:${data.type};base64,${data.audio}`;
-    lecteur.src = url;
-    lecteur.style.display = "block";
-    lien.href = url;
-    lien.style.display = "inline";
-    statut.textContent = "Ta musique est prête !";
-  } catch (e) {
-    statut.textContent = "Erreur : " + e.message + " (réessaie dans une minute)";
-  }
-  btn.disabled = false;
-});
-</script>
+    <header>
+        <h1>🎵 AVS-PROD-STUDIO</h1>
+        <p>Production — Sonorisation — Événements</p>
+    </header>
+
+    <section>
+        <div class="card">
+            <h2>À propos</h2>
+            <p>Bienvenue sur le site officiel de AVS-PROD-STUDIO. 
+            Nous vous accompagnons dans tous vos projets de production musicale, 
+            de sonorisation et d'organisation d'événements.</p>
+        </div>
+
+        <div class="card">
+            <h2>Nos Services</h2>
+            <p>✅ Enregistrement & Production<br>
+            ✅ Sonorisation & Éclairage<br>
+            ✅ Animation & Événements<br>
+            ✅ Mixage & Mastering</p>
+        </div>
+
+        <div class="card">
+            <h2>Contact</h2>
+            <p>📍 Cotonou, Bénin<br>
+            📞 +229 XX XX XX XX</p>
+        </div>
+    </section>
+
+    <footer>
+        © 2026 AVS-PROD-STUDIO — Tous droits réservés
+    </footer>
+
+</body>
+</html>
