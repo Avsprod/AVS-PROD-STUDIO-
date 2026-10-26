@@ -1,0 +1,42 @@
+exports.handler = async (event) => {
+  const headers = {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+  };
+  try {
+    const token = process.env.HF_TOKEN;
+    if (!token) {
+      return { statusCode: 500, headers, body: JSON.stringify({ error: "HF_TOKEN manquant dans Netlify" }) };
+    }
+    const body = JSON.parse(event.body || "{}");
+    const prompt = body.prompt || "afrobeat, epic, drums, bass";
+
+    const url = "https://router.huggingface.co/hf-inference/models/facebook/musicgen-small";
+
+    let res;
+    for (let i = 0; i < 3; i++) {
+      res = await fetch(url, {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+          Accept: "audio/flac",
+        },
+        body: JSON.stringify({ inputs: prompt }),
+      });
+      if (res.status !== 503) break;
+      await new Promise((r) => setTimeout(r, 8000));
+    }
+
+    if (!res.ok) {
+      const txt = await res.text();
+      return { statusCode: res.status, headers, body: JSON.stringify({ error: "HF " + res.status + ": " + txt.slice(0, 300) }) };
+    }
+
+    const type = res.headers.get("content-type") || "audio/flac";
+    const buf = Buffer.from(await res.arrayBuffer());
+    return { statusCode: 200, headers, body: JSON.stringify({ audio: buf.toString("base64"), type }) };
+  } catch (e) {
+    return { statusCode: 500, headers, body: JSON.stringify({ error: String(e) }) };
+  }
+};
