@@ -20,7 +20,7 @@ button:focus-visible,input:focus-visible,a:focus-visible,summary:focus-visible{o
 .hero{display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:var(--card);border:2px solid #ffc48f;border-radius:24px;padding:18px}
 .plus{flex:none;width:68px;height:68px;border-radius:20px;background:linear-gradient(var(--or),var(--or2));color:#fff;font-size:2.4rem;display:grid;place-items:center}
 .hero b{display:block;color:var(--or2);font-size:1.2rem}
-.hero span{color:#f59a55;font-size:.95rem}
+.hero .sub{color:#f59a55;font-size:.95rem}
 .card{background:var(--card);border-radius:22px;padding:16px;margin-bottom:14px}
 .song{display:flex;gap:14px;align-items:center}
 .cover{flex:none;width:64px;height:64px;border-radius:18px;background:linear-gradient(var(--or),var(--or2));color:#fff;font-size:1.8rem;display:grid;place-items:center}
@@ -67,7 +67,7 @@ nav .fab i{width:64px;height:64px;border-radius:50%;background:linear-gradient(v
   <h1 id="hello">Bonjour 👋</h1>
   <button class="hero" data-go="create">
     <span class="plus">+</span>
-    <span><b>Créer ma chanson 🎁</b><span>Afrobeat, Amapiano, Zouk, Hip-hop...</span></span>
+    <span><b>Créer ma chanson 🎁</b><span class="sub">Afrobeat, Amapiano, Zouk, Hip-hop...</span></span>
   </button>
   <h2>Chansons récentes</h2>
   <div id="recent"></div>
@@ -114,14 +114,7 @@ nav .fab i{width:64px;height:64px;border-radius:50%;background:linear-gradient(v
   <button data-go="lib"><i>♫</i>Ma bibliothèque</button>
 </nav>
 
-<script>
-const $=id=>document.getElementById(id);
-const TRACKS=[["kick","Grosse caisse"],["snare","Caisse claire"],["hat","Charley"],["tam","Tam-tam"],["bass","Basse"]];
-const STYLES={
-  afrobeat:{n:"Afrobeat",bpm:104,roots:[55,55,65.41,49],p:{kick:"x..x..x...x..x..",snare:"....x.......x...",hat:"x.x.x.x.x.x.x.x.",tam:"..x..x..x..x.x..",bass:"x..x..x...x..x.."}},
-  zouk:{n:"Zouk",bpm:96,roots:[58.27,65.41,49,55],p:{kick:"x...x...x...x...",snare:"....x.......x..x",hat:"x.xxx.xxx.xxx.xx",tam:"..x...x...x...x.",bass:"x.....x.x.....x."}},
-  amapiano:{n:"Amapiano",bpm:112,roots:[55,55,49,61.74],p:{kick:"x...x...x...x...",snare:"........x.......",hat:"..x...x...x...x.",tam:"x..x..x.x..x..x.",bass:"x..x...x..x...x."}},
-  hiphop:{n:"Hip-hop",bpm:90,roots:[49,49,55,43.65],p:{kick:"x..x......x.x...",snare:"....x.......x...",hat:"x.x.x.x.x.x.x.x.",tam:"......x.......x.",bass:"x..x......x.x..."}}
-};
-let pat={},bpm=104,roots=[55,55,65.41,49],cur="afrobeat";
-let ctx,master,dest,noiseBuf,timer=null,step=0,nextT=0,play
+<script src="app1.js"></script>
+<script src="app2.js"></script>
+</body>
+</html>
