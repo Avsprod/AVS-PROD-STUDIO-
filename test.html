@@ -1,0 +1,12 @@
+<button onclick="t()" style="font-size:22px;padding:14px">Tester</button>
+<pre id="o" style="white-space:pre-wrap"></pre>
+<script>
+async function t(){
+  o.textContent="...";
+  try{
+    var r=await fetch("/api/musique",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({prompt:"musique joyeuse"})});
+    var x=await r.text();
+    o.textContent=r.status+" "+x.slice(0,400);
+  }catch(e){o.textContent=String(e)}
+}
+</script>
