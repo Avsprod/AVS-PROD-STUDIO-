@@ -129,6 +129,37 @@ function profil(){
 maj();go("accueil");async function creer(){
   var idee=document.getElementById("id").value.trim();
   if(!idee){toast("Écris d’abord ton idée.");return}
+  if(credits<COUT){toast("Pas assez de crédits.");go("profil");return}
+  var btn=document.getElementById("go"),res=document.getElementById("res");
+  btn.disabled=true;btn.textContent="Création en cours… (1 à 3 min)";
+  res.innerHTML="";
+  var H="https://ace-step-ace-step.hf.space/gradio_api";
+  var voix={"Homme":"male vocals","Femme":"female vocals","Duo":"duet vocals"}[vx.value]||"vocals";
+  var prompt=st.value+", "+voix+", catchy";
+  var lyrics=idee.indexOf("[")>-1?idee:"[verse]\n"+idee+"\n[chorus]\n"+idee;
+  var D=[60,prompt,lyrics,27,15,"euler","apg",10,null,0.5,0,3,true,false,true,null,0,0,false,0.5,null,"none"];
+  try{
+    var r=await fetch(H+"/call/__call__",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({data:D})});
+    if(!r.ok)throw new Error("HTTP "+r.status);
+    var id=(await r.json()).event_id;
+    var r2=await fetch(H+"/call/__call__/"+id);
+    var tx=await r2.text();
+    var i=tx.indexOf("event: complete");
+    if(i<0)throw new Error("service occupé");
+    var line=tx.slice(i).split("\n").filter(function(l){return l.indexOf("data:")===0})[0];
+    var f=JSON.parse(line.slice(5))[0];
+    var src=f.url||(H+"/file="+f.path);
+    credits-=COUT;maj();
+    var c={titre:oc.value+" · "+st.value,info:vx.value+" · "+lg.value,date:new Date().toLocaleDateString("fr-FR"),src:""};
+    creations.unshift(c);ecrire("avs_creations",creations.slice(0,30));
+    res.innerHTML='<div class="card" style="margin-top:16px"><h3>'+esc(c.titre)+'</h3><audio controls src="'+src+'"></audio><a class="btn ghost" style="text-align:center;text-decoration:none" target="_blank" href="'+src+'">Télécharger</a></div>';
+  }catch(e){
+    res.innerHTML='<div class="card" style="margin-top:16px"><p>La création a échoué ('+esc(e.message)+'). Aucun crédit n’a été retiré. Réessaie dans quelques minutes.</p></div>';
+  }
+  btn.disabled=false;btn.textContent="Créer musique";
+} async function creer(){
+  var idee=document.getElementById("id").value.trim();
+  if(!idee){toast("Écris d’abord ton idée.");return}
   var m="Bonjour AVS PROD, je veux une chanson.\nOccasion : "+oc.value+"\nStyle : "+st.value+"\nVoix : "+vx.value+"\nLangue : "+lg.value+"\nIdée / paroles : "+idee;
   window.open("https://wa.me/22995892887?text="+encodeURIComponent(m),"_blank");
 }
