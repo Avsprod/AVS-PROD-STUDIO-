@@ -1,0 +1,118 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AVS PROD Music</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,Arial,sans-serif}
+body{background:#faf6ea;color:#14182b;min-height:100vh;padding:16px 16px 120px}
+.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
+.back{width:44px;height:44px;border-radius:50%;background:#fff;border:0;font-size:22px}
+.dots{display:flex;gap:6px}.dots i{width:14px;height:14px;border-radius:7px;background:#e2dfd0}.dots i.d{background:#f9a15c}.dots i.on{width:28px;background:#f26a14}
+.sp{width:44px}
+h1{font-size:28px;text-align:center;margin:8px 0}
+.sub{text-align:center;color:#6b7285;margin-bottom:20px}
+.g{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.o{background:#fff;border:2px solid transparent;border-radius:22px;padding:22px 8px;font-size:17px;font-weight:700;text-align:center;cursor:pointer}
+.o b{display:block;font-size:34px;margin-bottom:8px}
+.o.s{background:#fff0df;border-color:#f26a14}
+.ch{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+.c{background:#fff;border:2px solid #eee8d8;border-radius:30px;padding:14px 20px;font-weight:700;font-size:16px;cursor:pointer}
+.c.s{background:#fff0df;border-color:#f26a14}
+.c small{background:#fde7b8;color:#a05a00;border-radius:10px;padding:2px 8px;margin-left:6px;font-size:11px}
+h3{margin:18px 0 10px}
+input,textarea{width:100%;border:2px solid #eee8d8;border-radius:18px;padding:16px;font-size:16px;background:#fff;margin-bottom:12px}
+textarea{min-height:220px}
+.bar{position:fixed;left:16px;right:16px;bottom:18px}
+.bt{width:100%;border:0;border-radius:40px;padding:20px;font-size:19px;font-weight:800;color:#fff;background:linear-gradient(90deg,#fb923c,#ea580c)}
+.bt:disabled{opacity:.45}
+.card{background:#fff;border-radius:24px;padding:8px 20px;margin-bottom:16px}
+.r{display:flex;justify-content:space-between;gap:12px;padding:16px 0;border-bottom:1px solid #eee8d8}.r:last-child{border:0}.r span{color:#6b7285}.r b{text-align:right}
+.w{background:#fff3d6;color:#8a5200;border-radius:16px;padding:14px;margin-bottom:16px}
+audio{width:100%;margin:14px 0}
+a.l{display:block;text-align:center;padding:16px;border:2px solid #f26a14;border-radius:30px;color:#e85d04;font-weight:800;text-decoration:none;margin-top:10px}
+</style></head><body>
+<div class="top"><button class="back" id="bk">←</button><div class="dots" id="dt"></div><div class="sp"></div></div>
+<div id="v"></div>
+<div class="bar"><button class="bt" id="nx">Continuer</button></div>
+<script>
+var H="https://ace-step-ace-step.hf.space/gradio_api";
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+var st=0,S={vx:"Homme",ac:"Accent africain",lg:"Français",vt:"Normale"};
+var OC=[["🎂","Anniversaire"],["💒","Mariage"],["💕","Déclaration"],["🎓","Réussite"],["🎉","Fête"],["🕯️","Hommage"],["💪","Encouragement"],["✨","Autre"]];
+var VX=[["👨","Homme","male vocals, male singer, deep male voice"],["👩","Femme","female vocals, female singer, woman voice"],["👫","Mixte (duo)","male and female duet vocals"]];
+var AC=[["Automatique"],["Accent africain"],["Accent français"]];
+var SY=[["🥁","Afrobeat","afrobeat, afropop, percussion, talking drum, groovy bass, electric guitar, 105 bpm"],
+["💃","Coupé-Décalé","coupe-decale, african dance, ivorian, synth, percussion, upbeat, 125 bpm"],
+["🙏","Gospel","gospel, choir, organ, piano, claps, uplifting, 90 bpm"],
+["🎹","Amapiano","amapiano, log drum, deep bass, piano chords, house, shakers, 112 bpm"],
+["🌺","Zouk","zouk, caribbean, smooth, guitar, synth, sensual, 90 bpm"],
+["🪘","Zouglou","zouglou, african, percussion, choir, call and response, guitar, 120 bpm"],
+["🌍","Afro","afro pop, afrobeats, percussion, groovy, 100 bpm"],
+["🎤","R&B","r&b, soul, smooth, piano, 85 bpm"],
+["🎧","Rap / Hip-Hop","hip hop, rap, trap beat, 808 bass, hi-hats, 90 bpm"],
+["🎸","Acoustique","acoustic, guitar, soft, intimate, folk, 85 bpm"],
+["🌴","Reggae","reggae, offbeat guitar, bass, one drop, laid back, 80 bpm"],
+["🔊","Dancehall","dancehall, caribbean, riddim, bouncy, 100 bpm"],
+["🏝️","Kompa","kompa, haitian, guitar, synth, smooth dance, 115 bpm"],
+["🎺","Highlife","highlife, west african, guitar, brass, horns, percussion, 110 bpm"],
+["🇳🇬","Nigerian Music","afrobeats, nigerian pop, log drum, percussion, 105 bpm"],
+["🇸🇳","Mbalax","mbalax, senegalese, sabar drums, percussion, energetic, 110 bpm"]];
+var AM=[["😄","Joyeux","happy"],["🎉","Festif","festive, party"],["❤️","Romantique","romantic"],["🥲","Mélancolique","melancholic"],["⚡","Énergique","energetic"],["😎","Chill","chill, relaxed"],["🌅","Nostalgique","nostalgic"],["🔥","Épique","epic"]];
+var LG=[["Français"],["Anglais"],["Français + Anglais"],["Nouchi"],["Fon",1],["Yoruba",1],["Bariba",1],["Adja",1],["Éwé",1],["Kabyè",1],["Tem",1],["Moba",1]];
+var VT=[["🐢","Lente","slow tempo"],["🎵","Normale",""],["⚡","Rapide","fast tempo"]];
+var T=["On célèbre quoi aujourd’hui ? 🎉","Tes paroles ✍️","Qui chante tes mots ? 🎤","Quel style ? 🥁","Quelle ambiance ? 🎭","Dans quelle langue ? 🗣️","Quelle vitesse ? 🎚️","Prêt à créer ✨"];
+var SB=["Chaque grand moment mérite SA chanson.","Colle ton texte : il sera chanté mot pour mot.","Une voix d’homme, de femme ou un duo.","Le genre de ta chanson.","L’émotion de ta chanson.","C’est ton texte qui donne la langue.","Normale garde le rythme naturel du style.","Vérifie tes choix, puis lance la chanson."];
+function grid(a,k){return '<div class="g">'+a.map(function(x){return '<div class="o'+(S[k]===x[1]?' s':'')+'" data-k="'+k+'" data-v="'+x[1]+'"><b>'+x[0]+'</b>'+x[1]+'</div>'}).join("")+'</div>'}
+function chips(a,k){return '<div class="ch">'+a.map(function(x){return '<div class="c'+(S[k]===x[0]?' s':'')+'" data-k="'+k+'" data-v="'+x[0]+'">'+x[0]+(x[1]?'<small>BÊTA</small>':'')+'</div>'}).join("")+'</div>'}
+function ok(){return [S.oc,S.pa&&S.pa.trim(),S.vx,S.sy,S.am,S.lg,S.vt,1][st]}
+function U(){var n=document.getElementById("nx");n.disabled=!ok();n.textContent=st==7?"Créer ma chanson":"Continuer";
+document.getElementById("dt").innerHTML=T.map(function(_,i){return '<i class="'+(i==st?'on':i<st?'d':'')+'"></i>'}).join("")}
+function R(){
+ var h='<h1>'+T[st]+'</h1><p class="sub">'+SB[st]+'</p>';
+ if(st==0)h+=grid(OC,"oc");
+ if(st==1)h+='<input id="ti" placeholder="Titre de ta chanson" value="'+esc(S.ti||"")+'"><textarea id="pa" placeholder="Colle tes paroles ici">'+esc(S.pa||"")+'</textarea>';
+ if(st==2)h+=grid(VX,"vx")+'<h3>Accent de la voix</h3>'+chips(AC,"ac");
+ if(st==3)h+=grid(SY,"sy");
+ if(st==4)h+=grid(AM,"am");
+ if(st==5)h+=chips(LG,"lg");
+ if(st==6)h+=grid(VT,"vt");
+ if(st==7){
+  var beta=LG.some(function(x){return x[0]==S.lg&&x[1]});
+  h+='<div class="card">'+[["Occasion",S.oc],["Titre",S.ti||"Ma chanson"],["Voix",S.vx+" · "+S.ac],["Style",S.sy],["Ambiance",S.am],["Langue",S.lg],["Vitesse",S.vt]].map(function(r){return '<div class="r"><span>'+r[0]+'</span><b>'+esc(r[1])+'</b></div>'}).join("")+'</div>';
+  if(beta)h+='<div class="w">Langue locale (BÊTA) : le résultat peut être moins précis. Teste d’abord avec un court texte.</div>';
+ }
+ document.getElementById("v").innerHTML=h;U();
+}
+document.getElementById("v").addEventListener("click",function(e){var t=e.target.closest("[data-k]");if(!t)return;S[t.dataset.k]=t.dataset.v;R()});
+document.getElementById("v").addEventListener("input",function(e){if(e.target.id=="ti")S.ti=e.target.value;if(e.target.id=="pa")S.pa=e.target.value;U()});
+document.getElementById("bk").onclick=function(){if(st>0){st--;R()}};
+document.getElementById("nx").onclick=function(){if(st<7){st++;R()}else make()};
+async function run(D){
+ var r=await fetch(H+"/call/__call__",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({data:D})});
+ if(!r.ok)throw new Error("HTTP "+r.status);
+ var id=(await r.json()).event_id;
+ var tx=await (await fetch(H+"/call/__call__/"+id)).text();
+ var i=tx.indexOf("event: complete");
+ if(i<0)throw new Error("service occupé, réessaie");
+ var line=tx.slice(i).split("\n").filter(function(l){return l.indexOf("data:")==0})[0];
+ var f=JSON.parse(line.slice(5))[0];
+ return f.url||(H+"/file="+f.path);
+}
+async function make(){
+ var nx=document.getElementById("nx"),v=document.getElementById("v");
+ document.querySelectorAll(".w.err").forEach(function(x){x.remove()});
+ nx.disabled=true;nx.textContent="Création… (1 à 3 min)";
+ var g=function(a,n){return a.filter(function(x){return x[1]==n})[0]};
+ var tags=[g(VX,S.vx)[2],g(SY,S.sy)[2],g(AM,S.am)[2],S.ac=="Accent africain"?"african accent":S.ac=="Accent français"?"french accent":"",g(VT,S.vt)[2]].filter(Boolean).join(", ");
+ var ly=S.pa.replace(/[^\p{L}\p{N}\s\[\]\n.,!?'’-]/gu,"").trim();
+ if(ly.indexOf("[")<0)ly="[verse]\n"+ly;
+ var D=[150,tags,ly,27,15,"euler","apg",10,null,0.5,0,3,true,false,true,null,0,0,false,0.5,null,"none"];
+ try{
+  var src;
+  try{src=await run(D)}catch(e1){src=await run(D)}
+  document.querySelector(".bar").style.display="none";
+  v.innerHTML='<h1>Ta chanson est prête 🎶</h1><p class="sub">'+esc(S.ti||"Ma chanson")+'</p><audio controls src="'+src+'"></audio><a class="l" target="_blank" href="'+src+'">Télécharger</a><a class="l" href="javascript:location.reload()">Créer une autre chanson</a>';
+ }catch(e){
+  v.insertAdjacentHTML("beforeend",'<div class="w err">La création a échoué ('+esc(e.message)+'). Réessaie dans quelques minutes.</div>');
+  U();
+ }
+}
+R();
+</script></body></html>
