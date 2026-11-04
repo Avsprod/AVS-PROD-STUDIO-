@@ -126,7 +126,12 @@ function profil(){
   '<div class="card"><p class="sub">Solde</p><h1 style="color:var(--lime)">'+credits+' crédits</h1><p class="sub">'+COUT+' crédits = 1 création.</p></div>'+
   '<div class="card"><h3>Recharger</h3><p class="sub">Pour acheter des crédits, écris-nous sur WhatsApp avec ton paiement Mobile Money.</p><a class="btn" style="text-align:center;text-decoration:none" href="https://wa.me/22995892887?text=Bonjour%20AVS%20PROD%2C%20je%20veux%20des%20cr%C3%A9dits" target="_blank">Acheter des crédits</a></div>';
 }
-maj();go("accueil");
+maj();go("accueil");async function creer(){
+  var idee=document.getElementById("id").value.trim();
+  if(!idee){toast("Écris d’abord ton idée.");return}
+  var m="Bonjour AVS PROD, je veux une chanson.\nOccasion : "+oc.value+"\nStyle : "+st.value+"\nVoix : "+vx.value+"\nLangue : "+lg.value+"\nIdée / paroles : "+idee;
+  window.open("https://wa.me/22995892887?text="+encodeURIComponent(m),"_blank");
+}
 </script>
 </body>
 </html>
