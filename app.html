@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#0b0b0d">
 <title>AVS PROD Music</title>
 <style>
-:root{--bg:#0b0b0d;--card:#1b1c20;--line:#2a2b30;--lime:#d8ff1a;--txt:#fff;--mut:#9a9aa3}
+:root{--bg:#0b0b0d;--card:#1b1c20;--line:#2a2b30;--lime:#1ec8ff;--txt:#fff;--mut:#9a9aa3}
 *{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,Arial,sans-serif}
 body{background:var(--bg);color:var(--txt);min-height:100vh;padding-bottom:90px}
 header{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--bg);z-index:5}
@@ -20,8 +20,8 @@ main{padding:20px 16px}
 h1{font-size:30px;line-height:1.1;margin:10px 0;text-transform:uppercase}
 p.sub{color:var(--mut);margin-bottom:18px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px;margin-bottom:14px}
-.hero{height:170px;border-radius:14px;background:linear-gradient(135deg,#3a2a10,#d8ff1a22);display:flex;align-items:flex-end;padding:12px;font-size:26px;font-weight:900;margin-bottom:12px}
-.btn{display:block;width:100%;background:var(--lime);color:#111;border:0;border-radius:14px;padding:15px;font-size:17px;font-weight:800;cursor:pointer;box-shadow:0 4px 0 #8aa800}
+.hero{height:170px;border-radius:14px;background:linear-gradient(135deg,#0f2a3a,#1ec8ff33);display:flex;align-items:flex-end;padding:12px;font-size:26px;font-weight:900;margin-bottom:12px}
+.btn{display:block;width:100%;background:var(--lime);color:#111;border:0;border-radius:14px;padding:15px;font-size:17px;font-weight:800;cursor:pointer;box-shadow:0 4px 0 #0a7fa8}
 .btn:disabled{opacity:.5}
 .btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line);box-shadow:none}
 label{display:block;margin:14px 0 6px;color:var(--mut);font-size:14px}
@@ -34,7 +34,7 @@ nav{position:fixed;bottom:0;left:0;right:0;background:#101114;border-top:1px sol
 nav button{background:none;border:0;color:var(--mut);font-size:12px;display:flex;flex-direction:column;align-items:center;gap:4px;padding:4px 6px;cursor:pointer}
 nav button .i{font-size:22px}
 nav button.on{color:#fff}
-nav button.gen .i{background:var(--lime);color:#111;border-radius:14px;padding:6px 16px;margin-top:-22px;box-shadow:0 4px 0 #8aa800;font-weight:900}
+nav button.gen .i{background:var(--lime);color:#111;border-radius:14px;padding:6px 16px;margin-top:-22px;box-shadow:0 4px 0 #0a7fa8;font-weight:900}
 .toast{position:fixed;left:16px;right:16px;bottom:100px;background:#0b6fc2;padding:14px;border-radius:12px;text-align:center;display:none;z-index:20}
 .pill{display:inline-block;background:#111216;border:1px solid var(--line);border-radius:20px;padding:4px 10px;font-size:12px;color:var(--mut);margin:2px 4px 2px 0}
 </style>
@@ -57,7 +57,7 @@ nav button.gen .i{background:var(--lime);color:#111;border-radius:14px;padding:6
   <button data-p="profil"><span class="i">☺</span>Profil</button>
 </nav>
 <script>
-var COUT=2, DEPART=10, API="/api/musique";
+var COUT=2, DEPART=10;
 function lire(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}
 function ecrire(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
 var credits=lire("avs_credits",DEPART), creations=lire("avs_creations",[]);
@@ -74,7 +74,7 @@ document.querySelectorAll("nav button").forEach(function(b){b.onclick=function()
 
 function accueil(){
   V.innerHTML='<div class="kick">TON STUDIO CRÉATIF</div><h1>Qu’est-ce qu’on crée aujourd’hui ?</h1><p class="sub">Une idée, une musique. À toi de jouer.</p>'+
-  '<div class="card"><div class="hero">TA MUSIQUE</div><h3>CRÉER UNE MUSIQUE</h3><p class="sub">Transforme tes idées en chanson. Deux versions, ton style.</p><p class="lime" style="margin-bottom:12px">'+COUT+' crédits par création</p><button class="btn" onclick="go(\'generer\')">Créer musique</button></div>'+
+  '<div class="card"><div class="hero">TA MUSIQUE</div><h3>CRÉER UNE MUSIQUE</h3><p class="sub">Transforme tes idées en chanson.</p><p class="lime" style="margin-bottom:12px">'+COUT+' crédits par création</p><button class="btn" onclick="go(\'generer\')">Créer musique</button></div>'+
   '<div class="card"><h3>AVS PROD</h3><p class="sub">Chansons personnalisées, jingles pub, anniversaires, mariages. Écris-nous sur WhatsApp : +229 95 89 28 87.</p><a class="btn ghost" style="text-align:center;text-decoration:none" href="https://wa.me/22995892887" target="_blank">Nous écrire sur WhatsApp</a></div>';
 }
 function decouvrir(){
@@ -91,42 +91,10 @@ function generer(){
   '<label>Occasion</label><select id="oc">'+opt(["Anniversaire","Mariage","Jingle pub","Fête","Amour","Autre"],p[0])+'</select>'+
   '<label>Style</label><select id="st">'+opt(["Afrobeat","Zouglou","Zouk","Amapiano","Gospel","Rap","Reggae"],p[1])+'</select>'+
   '<div class="row"><div><label>Voix</label><select id="vx">'+opt(["Homme","Femme","Duo"])+'</select></div><div><label>Langue</label><select id="lg">'+opt(["Français","Anglais","Fon","Éwé","Yoruba"],p[2])+'</select></div></div>'+
-  '<label>Ton idée ou tes paroles</label><textarea id="id" placeholder="Ex : une chanson pour l’anniversaire de ma mère, joyeuse et dansante"></textarea>'+
+  '<label>Ton idée ou tes paroles</label><textarea id="id" placeholder="Ex : paroles de ta chanson, quelques lignes suffisent"></textarea>'+
   '<p class="lime" style="margin:12px 0">'+COUT+' crédits par création</p><button class="btn" id="go" onclick="creer()">Créer musique</button><div id="res"></div>';
 }
 async function creer(){
-  var idee=document.getElementById("id").value.trim();
-  if(!idee){toast("Écris d’abord ton idée.");return}
-  if(credits<COUT){toast("Pas assez de crédits.");go("profil");return}
-  var btn=document.getElementById("go"),res=document.getElementById("res");
-  btn.disabled=true;btn.textContent="Création en cours…";
-  var d={occasion:oc.value,style:st.value,voix:vx.value,langue:lg.value,idee:idee};
-  var prompt=d.style+" "+d.occasion+" "+d.voix+" "+d.langue+" : "+idee;
-  try{
-    var r=await fetch(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({prompt:prompt,idee:idee,style:d.style,occasion:d.occasion,voix:d.voix,langue:d.langue})});
-    if(!r.ok)throw new Error("HTTP "+r.status);
-    var ct=r.headers.get("content-type")||"",src;
-    if(ct.indexOf("audio")===0){src=URL.createObjectURL(await r.blob())}
-    else{var j=await r.json();src=j.audio||j.url||j.audioUrl;if(!src)throw new Error("Pas d’audio")}
-    credits-=COUT;maj();
-    var c={titre:d.occasion+" · "+d.style,info:d.voix+" · "+d.langue,date:new Date().toLocaleDateString("fr-FR"),src:src.indexOf("blob:")===0?"":src};
-    creations.unshift(c);ecrire("avs_creations",creations.slice(0,30));
-    res.innerHTML='<div class="card" style="margin-top:16px"><h3>'+esc(c.titre)+'</h3><audio controls src="'+src+'"></audio><a class="btn ghost" style="text-align:center;text-decoration:none" download="avs-prod.mp3" href="'+src+'">Télécharger</a></div>';
-  }catch(e){
-    res.innerHTML='<div class="card" style="margin-top:16px"><p>La création a échoué ('+esc(e.message)+'). Aucun crédit n’a été retiré. Réessaie, ou commande ta chanson sur WhatsApp.</p></div>';
-  }
-  btn.disabled=false;btn.textContent="Créer musique";
-}
-function mesCreations(){
-  V.innerHTML='<div class="kick">MES CRÉATIONS</div><h1>Ma bibliothèque</h1>'+
-  (creations.length?creations.map(function(c){return '<div class="card"><h3>'+esc(c.titre)+'</h3><span class="pill">'+esc(c.info)+'</span><span class="pill">'+esc(c.date)+'</span>'+(c.src?'<audio controls src="'+c.src+'"></audio>':'')+'</div>'}).join(""):'<p class="sub">Aucune création pour l’instant.</p><button class="btn" onclick="go(\'generer\')">Créer ma première musique</button>');
-}
-function profil(){
-  V.innerHTML='<div class="kick">PROFIL</div><h1>Mes crédits</h1>'+
-  '<div class="card"><p class="sub">Solde</p><h1 style="color:var(--lime)">'+credits+' crédits</h1><p class="sub">'+COUT+' crédits = 1 création.</p></div>'+
-  '<div class="card"><h3>Recharger</h3><p class="sub">Pour acheter des crédits, écris-nous sur WhatsApp avec ton paiement Mobile Money.</p><a class="btn" style="text-align:center;text-decoration:none" href="https://wa.me/22995892887?text=Bonjour%20AVS%20PROD%2C%20je%20veux%20des%20cr%C3%A9dits" target="_blank">Acheter des crédits</a></div>';
-}
-maj();go("accueil");async function creer(){
   var idee=document.getElementById("id").value.trim();
   if(!idee){toast("Écris d’abord ton idée.");return}
   if(credits<COUT){toast("Pas assez de crédits.");go("profil");return}
@@ -157,12 +125,17 @@ maj();go("accueil");async function creer(){
     res.innerHTML='<div class="card" style="margin-top:16px"><p>La création a échoué ('+esc(e.message)+'). Aucun crédit n’a été retiré. Réessaie dans quelques minutes.</p></div>';
   }
   btn.disabled=false;btn.textContent="Créer musique";
-} async function creer(){
-  var idee=document.getElementById("id").value.trim();
-  if(!idee){toast("Écris d’abord ton idée.");return}
-  var m="Bonjour AVS PROD, je veux une chanson.\nOccasion : "+oc.value+"\nStyle : "+st.value+"\nVoix : "+vx.value+"\nLangue : "+lg.value+"\nIdée / paroles : "+idee;
-  window.open("https://wa.me/22995892887?text="+encodeURIComponent(m),"_blank");
 }
+function mesCreations(){
+  V.innerHTML='<div class="kick">MES CRÉATIONS</div><h1>Ma bibliothèque</h1>'+
+  (creations.length?creations.map(function(c){return '<div class="card"><h3>'+esc(c.titre)+'</h3><span class="pill">'+esc(c.info)+'</span><span class="pill">'+esc(c.date)+'</span></div>'}).join(""):'<p class="sub">Aucune création pour l’instant.</p><button class="btn" onclick="go(\'generer\')">Créer ma première musique</button>');
+}
+function profil(){
+  V.innerHTML='<div class="kick">PROFIL</div><h1>Mes crédits</h1>'+
+  '<div class="card"><p class="sub">Solde</p><h1 style="color:var(--lime)">'+credits+' crédits</h1><p class="sub">'+COUT+' crédits = 1 création.</p></div>'+
+  '<div class="card"><h3>Recharger</h3><p class="sub">Pour acheter des crédits, écris-nous sur WhatsApp avec ton paiement Mobile Money.</p><a class="btn" style="text-align:center;text-decoration:none" href="https://wa.me/22995892887?text=Bonjour%20AVS%20PROD%2C%20je%20veux%20des%20cr%C3%A9dits" target="_blank">Acheter des crédits</a></div>';
+}
+maj();go("accueil");
 </script>
 </body>
 </html>
