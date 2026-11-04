@@ -1,0 +1,19 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<button onclick="t()" style="font-size:22px;padding:14px">Lire l'API</button>
+<pre id="o" style="white-space:pre-wrap;font-size:12px"></pre>
+<script>
+async function t(){
+  o.textContent="...";
+  try{
+    var r=await fetch("https://ace-step-ace-step.hf.space/gradio_api/info");
+    var j=await r.json();
+    var s="";
+    var e=j.named_endpoints||{};
+    Object.keys(e).forEach(function(k){
+      s+=k+"\n";
+      (e[k].parameters||[]).forEach(function(p,i){s+="  "+i+" "+p.parameter_name+" ("+(p.python_type&&p.python_type.type)+")"+(p.parameter_has_default?" =":"")+(p.parameter_has_default?JSON.stringify(p.parameter_default).slice(0,40):"")+"\n"});
+    });
+    o.textContent=r.status+"\n"+s;
+  }catch(x){o.textContent=String(x)}
+}
+</script>
