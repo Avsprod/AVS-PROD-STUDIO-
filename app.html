@@ -1,141 +1,102 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0b0b0d">
-<title>AVS PROD Music</title>
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AVS PROD Music</title>
 <style>
-:root{--bg:#0b0b0d;--card:#1b1c20;--line:#2a2b30;--lime:#1ec8ff;--txt:#fff;--mut:#9a9aa3}
 *{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,Arial,sans-serif}
-body{background:var(--bg);color:var(--txt);min-height:100vh;padding-bottom:90px}
-header{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--bg);z-index:5}
-.logo{font-weight:900;letter-spacing:1px}
-.logo span{color:var(--lime)}
-.cred{border:1px solid var(--line);background:var(--card);padding:8px 14px;border-radius:12px;font-weight:700;cursor:pointer}
-.cred b{color:var(--lime)}
-.wa{background:#25d366;color:#fff;text-decoration:none;border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;font-weight:900}
-main{padding:20px 16px}
-.kick{color:var(--lime);font-weight:800;font-size:13px;letter-spacing:.5px}
-h1{font-size:30px;line-height:1.1;margin:10px 0;text-transform:uppercase}
-p.sub{color:var(--mut);margin-bottom:18px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px;margin-bottom:14px}
-.hero{height:170px;border-radius:14px;background:linear-gradient(135deg,#0f2a3a,#1ec8ff33);display:flex;align-items:flex-end;padding:12px;font-size:26px;font-weight:900;margin-bottom:12px}
-.btn{display:block;width:100%;background:var(--lime);color:#111;border:0;border-radius:14px;padding:15px;font-size:17px;font-weight:800;cursor:pointer;box-shadow:0 4px 0 #0a7fa8}
-.btn:disabled{opacity:.5}
-.btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line);box-shadow:none}
-label{display:block;margin:14px 0 6px;color:var(--mut);font-size:14px}
-select,textarea,input{width:100%;background:#111216;color:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;font-size:16px}
-textarea{min-height:110px;resize:vertical}
-.lime{color:var(--lime);font-weight:700}
-audio{width:100%;margin:10px 0}
-.row{display:flex;gap:8px}.row>*{flex:1}
-nav{position:fixed;bottom:0;left:0;right:0;background:#101114;border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:8px 4px calc(8px + env(safe-area-inset-bottom));z-index:9}
-nav button{background:none;border:0;color:var(--mut);font-size:12px;display:flex;flex-direction:column;align-items:center;gap:4px;padding:4px 6px;cursor:pointer}
-nav button .i{font-size:22px}
-nav button.on{color:#fff}
-nav button.gen .i{background:var(--lime);color:#111;border-radius:14px;padding:6px 16px;margin-top:-22px;box-shadow:0 4px 0 #0a7fa8;font-weight:900}
-.toast{position:fixed;left:16px;right:16px;bottom:100px;background:#0b6fc2;padding:14px;border-radius:12px;text-align:center;display:none;z-index:20}
-.pill{display:inline-block;background:#111216;border:1px solid var(--line);border-radius:20px;padding:4px 10px;font-size:12px;color:var(--mut);margin:2px 4px 2px 0}
-</style>
-</head>
-<body>
-<header>
-  <div class="logo">AVS <span>PROD</span> MUSIC</div>
-  <div style="display:flex;gap:10px;align-items:center">
-    <a class="wa" href="https://wa.me/22995892887" target="_blank">W</a>
-    <div class="cred" onclick="go('profil')"><b id="cr">0</b> crédits +</div>
-  </div>
-</header>
-<main id="v"></main>
-<div class="toast" id="t"></div>
-<nav>
-  <button data-p="accueil"><span class="i">⌂</span>Accueil</button>
-  <button data-p="decouvrir"><span class="i">◎</span>Découvrir</button>
-  <button data-p="generer" class="gen"><span class="i">✦</span>Générer</button>
-  <button data-p="creations"><span class="i">♫</span>Mes créations</button>
-  <button data-p="profil"><span class="i">☺</span>Profil</button>
-</nav>
+body{background:#faf6ea;color:#14182b;min-height:100vh;padding:16px 16px 120px}
+.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
+.back{width:44px;height:44px;border-radius:50%;background:#fff;border:0;font-size:22px}
+.dots{display:flex;gap:6px}.dots i{width:14px;height:14px;border-radius:7px;background:#e2dfd0}.dots i.d{background:#f9a15c}.dots i.on{width:28px;background:#f26a14}
+.cr{color:#e85d04;font-weight:800;font-size:14px}
+h1{font-size:28px;text-align:center;margin:8px 0}
+.sub{text-align:center;color:#6b7285;margin-bottom:20px}
+.g{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.o{background:#fff;border:2px solid transparent;border-radius:22px;padding:22px 8px;font-size:17px;font-weight:700;text-align:center;cursor:pointer}
+.o b{display:block;font-size:34px;margin-bottom:8px}
+.o.s{background:#fff0df;border-color:#f26a14}
+.ch{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+.c{background:#fff;border:2px solid #eee8d8;border-radius:30px;padding:14px 20px;font-weight:700;font-size:16px;cursor:pointer}
+.c.s{background:#fff0df;border-color:#f26a14}
+.c small{background:#fde7b8;color:#a05a00;border-radius:10px;padding:2px 8px;margin-left:6px;font-size:11px}
+h3{margin:18px 0 10px}
+input,textarea{width:100%;border:2px solid #eee8d8;border-radius:18px;padding:16px;font-size:16px;background:#fff;margin-bottom:12px}
+textarea{min-height:220px}
+.bar{position:fixed;left:16px;right:16px;bottom:18px}
+.bt{width:100%;border:0;border-radius:40px;padding:20px;font-size:19px;font-weight:800;color:#fff;background:linear-gradient(90deg,#fb923c,#ea580c)}
+.bt:disabled{opacity:.45}
+.card{background:#fff;border-radius:24px;padding:8px 20px;margin-bottom:16px}
+.r{display:flex;justify-content:space-between;gap:12px;padding:16px 0;border-bottom:1px solid #eee8d8}.r:last-child{border:0}.r span{color:#6b7285}.r b{text-align:right}
+.w{background:#fff3d6;color:#8a5200;border-radius:16px;padding:14px;margin-bottom:16px}
+audio{width:100%;margin:14px 0}
+a.l{display:block;text-align:center;padding:16px;border:2px solid #f26a14;border-radius:30px;color:#e85d04;font-weight:800;text-decoration:none;margin-top:10px}
+</style></head><body>
+<div class="top"><button class="back" id="bk">←</button><div class="dots" id="dt"></div><div class="cr" id="cr"></div></div>
+<div id="v"></div>
+<div class="bar"><button class="bt" id="nx">Continuer</button></div>
 <script>
-var COUT=2, DEPART=10;
-function lire(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}
-function ecrire(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
-var credits=lire("avs_credits",DEPART), creations=lire("avs_creations",[]);
-function maj(){document.getElementById("cr").textContent=credits;ecrire("avs_credits",credits)}
-function toast(m){var t=document.getElementById("t");t.textContent=m;t.style.display="block";setTimeout(function(){t.style.display="none"},3000)}
+var COUT=2,H="https://ace-step-ace-step.hf.space/gradio_api";
+function L(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}
+function W(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
-var V=document.getElementById("v");
-function go(p){
-  document.querySelectorAll("nav button").forEach(function(b){b.classList.toggle("on",b.dataset.p===p)});
-  window.scrollTo(0,0);
-  ({accueil:accueil,decouvrir:decouvrir,generer:generer,creations:mesCreations,profil:profil})[p]();
+var cr=L("avs_credits",10),st=0,S={vx:"Homme",ac:"Accent africain",lg:"Français",vt:"Normale"};
+var OC=[["🎂","Anniversaire"],["💒","Mariage"],["💕","Déclaration"],["🎓","Réussite"],["🎉","Fête"],["🕯️","Hommage"],["💪","Encouragement"],["✨","Autre"]];
+var VX=[["👨","Homme","male vocals"],["👩","Femme","female vocals"],["👫","Mixte (duo)","duet, male and female vocals"]];
+var AC=[["Automatique"],["Accent africain"],["Accent français"]];
+var SY=[["🥁","Afrobeat","afrobeat"],["💃","Coupé-Décalé","coupe-decale, african dance"],["🙏","Gospel","gospel"],["🎹","Amapiano","amapiano"],["🌺","Zouk","zouk"],["🪘","Zouglou","zouglou, african"],["🌍","Afro","afropop"],["🎤","R&B","r&b"],["🎧","Rap / Hip-Hop","hip hop, rap"],["🎸","Acoustique","acoustic guitar"],["🌴","Reggae","reggae"],["🔊","Dancehall","dancehall"],["🏝️","Kompa","kompa"],["🎺","Highlife","highlife"],["🇳🇬","Nigerian Music","afrobeats nigerian"],["🇸🇳","Mbalax","mbalax, african percussion"]];
+var AM=[["😄","Joyeux","happy"],["🎉","Festif","festive, party"],["❤️","Romantique","romantic"],["🥲","Mélancolique","melancholic"],["⚡","Énergique","energetic"],["😎","Chill","chill, relaxed"],["🌅","Nostalgique","nostalgic"],["🔥","Épique","epic"]];
+var LG=[["Français"],["Anglais"],["Français + Anglais"],["Nouchi"],["Fon",1],["Yoruba",1],["Bariba",1],["Adja",1],["Éwé",1],["Kabyè",1],["Tem",1],["Moba",1]];
+var VT=[["🐢","Lente","slow tempo"],["🎵","Normale",""],["⚡","Rapide","fast tempo"]];
+var T=["On célèbre quoi aujourd’hui ? 🎉","Tes paroles ✍️","Qui chante tes mots ? 🎤","Quel style ? 🥁","Quelle ambiance ? 🎭","Dans quelle langue ? 🗣️","Quelle vitesse ? 🎚️","Prêt à créer ✨"];
+var SB=["Chaque grand moment mérite SA chanson.","Colle ton texte : il sera chanté mot pour mot.","Une voix d’homme, de femme ou un duo.","Le genre de ta chanson.","L’émotion de ta chanson.","C’est ton texte qui donne la langue.","Normale garde le rythme naturel du style.","Vérifie tes choix, puis lance la chanson."];
+function grid(a,k){return '<div class="g">'+a.map(function(x){return '<div class="o'+(S[k]===x[1]?' s':'')+'" data-k="'+k+'" data-v="'+x[1]+'"><b>'+x[0]+'</b>'+x[1]+'</div>'}).join("")+'</div>'}
+function chips(a,k){return '<div class="ch">'+a.map(function(x){return '<div class="c'+(S[k]===x[0]?' s':'')+'" data-k="'+k+'" data-v="'+x[0]+'">'+x[0]+(x[1]?'<small>BÊTA</small>':'')+'</div>'}).join("")+'</div>'}
+function ok(){return [S.oc,S.pa&&S.pa.trim(),S.vx,S.sy,S.am,S.lg,S.vt,1][st]}
+function U(){var n=document.getElementById("nx");n.disabled=!ok();n.textContent=st==7?"Créer ma chanson ("+COUT+" crédits)":"Continuer";
+document.getElementById("cr").textContent=cr+" crédits";
+document.getElementById("dt").innerHTML=T.map(function(_,i){return '<i class="'+(i==st?'on':i<st?'d':'')+'"></i>'}).join("")}
+function R(){
+ var h='<h1>'+T[st]+'</h1><p class="sub">'+SB[st]+'</p>';
+ if(st==0)h+=grid(OC,"oc");
+ if(st==1)h+='<input id="ti" placeholder="Titre de ta chanson" value="'+esc(S.ti||"")+'"><textarea id="pa" placeholder="Colle tes paroles ici">'+esc(S.pa||"")+'</textarea>';
+ if(st==2)h+=grid(VX,"vx")+'<h3>Accent de la voix</h3>'+chips(AC,"ac");
+ if(st==3)h+=grid(SY,"sy");
+ if(st==4)h+=grid(AM,"am");
+ if(st==5)h+=chips(LG,"lg");
+ if(st==6)h+=grid(VT,"vt");
+ if(st==7){
+  var beta=LG.some(function(x){return x[0]==S.lg&&x[1]});
+  h+='<div class="card">'+[["Occasion",S.oc],["Titre",S.ti||"Ma chanson"],["Voix",S.vx+" · "+S.ac],["Style",S.sy],["Ambiance",S.am],["Langue",S.lg],["Vitesse",S.vt]].map(function(r){return '<div class="r"><span>'+r[0]+'</span><b>'+esc(r[1])+'</b></div>'}).join("")+'</div>';
+  if(beta)h+='<div class="w">Langue locale (BÊTA) : le résultat peut être moins précis. Teste d’abord avec un court texte.</div>';
+ }
+ document.getElementById("v").innerHTML=h;U();
 }
-document.querySelectorAll("nav button").forEach(function(b){b.onclick=function(){go(b.dataset.p)}});
-
-function accueil(){
-  V.innerHTML='<div class="kick">TON STUDIO CRÉATIF</div><h1>Qu’est-ce qu’on crée aujourd’hui ?</h1><p class="sub">Une idée, une musique. À toi de jouer.</p>'+
-  '<div class="card"><div class="hero">TA MUSIQUE</div><h3>CRÉER UNE MUSIQUE</h3><p class="sub">Transforme tes idées en chanson.</p><p class="lime" style="margin-bottom:12px">'+COUT+' crédits par création</p><button class="btn" onclick="go(\'generer\')">Créer musique</button></div>'+
-  '<div class="card"><h3>AVS PROD</h3><p class="sub">Chansons personnalisées, jingles pub, anniversaires, mariages. Écris-nous sur WhatsApp : +229 95 89 28 87.</p><a class="btn ghost" style="text-align:center;text-decoration:none" href="https://wa.me/22995892887" target="_blank">Nous écrire sur WhatsApp</a></div>';
+document.getElementById("v").addEventListener("click",function(e){var t=e.target.closest("[data-k]");if(!t)return;S[t.dataset.k]=t.dataset.v;R()});
+document.getElementById("v").addEventListener("input",function(e){if(e.target.id=="ti")S.ti=e.target.value;if(e.target.id=="pa")S.pa=e.target.value;U()});
+document.getElementById("bk").onclick=function(){if(st>0){st--;R()}};
+document.getElementById("nx").onclick=function(){if(st<7){st++;R()}else make()};
+async function make(){
+ if(cr<COUT){alert("Pas assez de crédits. Écris-nous sur WhatsApp : +229 95 89 28 87");return}
+ var nx=document.getElementById("nx"),v=document.getElementById("v");
+ nx.disabled=true;nx.textContent="Création… (1 à 3 min)";
+ var g=function(a,n){return a.filter(function(x){return x[1]==n})[0]};
+ var tags=[g(SY,S.sy)[2],g(AM,S.am)[2],g(VX,S.vx)[2],S.ac=="Accent africain"?"african accent":S.ac=="Accent français"?"french accent":"",g(VT,S.vt)[2]].filter(Boolean).join(", ");
+ var ly=S.pa.replace(/[^\p{L}\p{N}\s\[\]\n.,!?'’-]/gu,"").trim();
+ if(ly.indexOf("[")<0)ly="[verse]\n"+ly;
+ var D=[150,tags,ly,27,15,"euler","apg",10,null,0.5,0,3,true,false,true,null,0,0,false,0.5,null,"none"];
+ try{
+  var r=await fetch(H+"/call/__call__",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({data:D})});
+  if(!r.ok)throw new Error("HTTP "+r.status);
+  var id=(await r.json()).event_id;
+  var tx=await (await fetch(H+"/call/__call__/"+id)).text();
+  var i=tx.indexOf("event: complete");
+  if(i<0)throw new Error("service occupé");
+  var line=tx.slice(i).split("\n").filter(function(l){return l.indexOf("data:")==0})[0];
+  var f=JSON.parse(line.slice(5))[0],src=f.url||(H+"/file="+f.path);
+  cr-=COUT;W("avs_credits",cr);
+  document.querySelector(".bar").style.display="none";U();
+  v.innerHTML='<h1>Ta chanson est prête 🎶</h1><p class="sub">'+esc(S.ti||"Ma chanson")+'</p><audio controls src="'+src+'"></audio><a class="l" target="_blank" href="'+src+'">Télécharger</a><a class="l" href="javascript:location.reload()">Créer une autre chanson</a>';
+ }catch(e){
+  v.insertAdjacentHTML("beforeend",'<div class="w">La création a échoué ('+esc(e.message)+'). Aucun crédit n’a été retiré. Réessaie dans quelques minutes.</div>');
+  U();
+ }
 }
-function decouvrir(){
-  var ex=[["Anniversaire","Afrobeat","Français"],["Mariage","Zouk","Français"],["Jingle pub","Amapiano","Français"],["Fête","Zouglou","Français"]];
-  V.innerHTML='<div class="kick">DÉCOUVRIR</div><h1>Idées de styles</h1><p class="sub">Touche une idée pour la créer.</p>'+
-  ex.map(function(e,i){return '<div class="card"><h3>'+e[0]+'</h3><span class="pill">'+e[1]+'</span><span class="pill">'+e[2]+'</span><button class="btn ghost" style="margin-top:12px" onclick="idee('+i+')">Utiliser cette idée</button></div>'}).join("");
-  window.EX=ex;
-}
-function idee(i){window.PRE=window.EX[i];go("generer")}
-function generer(){
-  var p=window.PRE||[];window.PRE=null;
-  function opt(l,sel){return l.map(function(x){return '<option'+(x===sel?' selected':'')+'>'+x+'</option>'}).join("")}
-  V.innerHTML='<div class="kick">GÉNÉRER</div><h1>Créer une musique</h1>'+
-  '<label>Occasion</label><select id="oc">'+opt(["Anniversaire","Mariage","Jingle pub","Fête","Amour","Autre"],p[0])+'</select>'+
-  '<label>Style</label><select id="st">'+opt(["Afrobeat","Zouglou","Zouk","Amapiano","Gospel","Rap","Reggae"],p[1])+'</select>'+
-  '<div class="row"><div><label>Voix</label><select id="vx">'+opt(["Homme","Femme","Duo"])+'</select></div><div><label>Langue</label><select id="lg">'+opt(["Français","Anglais","Fon","Éwé","Yoruba"],p[2])+'</select></div></div>'+
-  '<label>Ton idée ou tes paroles</label><textarea id="id" placeholder="Ex : paroles de ta chanson, quelques lignes suffisent"></textarea>'+
-  '<p class="lime" style="margin:12px 0">'+COUT+' crédits par création</p><button class="btn" id="go" onclick="creer()">Créer musique</button><div id="res"></div>';
-}
-async function creer(){
-  var idee=document.getElementById("id").value.trim();
-  if(!idee){toast("Écris d’abord ton idée.");return}
-  if(credits<COUT){toast("Pas assez de crédits.");go("profil");return}
-  var btn=document.getElementById("go"),res=document.getElementById("res");
-  btn.disabled=true;btn.textContent="Création en cours… (1 à 3 min)";
-  res.innerHTML="";
-  var H="https://ace-step-ace-step.hf.space/gradio_api";
-  var voix={"Homme":"male vocals","Femme":"female vocals","Duo":"duet vocals"}[vx.value]||"vocals";
-  var prompt=st.value+", "+voix+", catchy";
-  var lyrics=idee.indexOf("[")>-1?idee:"[verse]\n"+idee+"\n[chorus]\n"+idee;
-  var D=[60,prompt,lyrics,27,15,"euler","apg",10,null,0.5,0,3,true,false,true,null,0,0,false,0.5,null,"none"];
-  try{
-    var r=await fetch(H+"/call/__call__",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({data:D})});
-    if(!r.ok)throw new Error("HTTP "+r.status);
-    var id=(await r.json()).event_id;
-    var r2=await fetch(H+"/call/__call__/"+id);
-    var tx=await r2.text();
-    var i=tx.indexOf("event: complete");
-    if(i<0)throw new Error("service occupé");
-    var line=tx.slice(i).split("\n").filter(function(l){return l.indexOf("data:")===0})[0];
-    var f=JSON.parse(line.slice(5))[0];
-    var src=f.url||(H+"/file="+f.path);
-    credits-=COUT;maj();
-    var c={titre:oc.value+" · "+st.value,info:vx.value+" · "+lg.value,date:new Date().toLocaleDateString("fr-FR"),src:""};
-    creations.unshift(c);ecrire("avs_creations",creations.slice(0,30));
-    res.innerHTML='<div class="card" style="margin-top:16px"><h3>'+esc(c.titre)+'</h3><audio controls src="'+src+'"></audio><a class="btn ghost" style="text-align:center;text-decoration:none" target="_blank" href="'+src+'">Télécharger</a></div>';
-  }catch(e){
-    res.innerHTML='<div class="card" style="margin-top:16px"><p>La création a échoué ('+esc(e.message)+'). Aucun crédit n’a été retiré. Réessaie dans quelques minutes.</p></div>';
-  }
-  btn.disabled=false;btn.textContent="Créer musique";
-}
-function mesCreations(){
-  V.innerHTML='<div class="kick">MES CRÉATIONS</div><h1>Ma bibliothèque</h1>'+
-  (creations.length?creations.map(function(c){return '<div class="card"><h3>'+esc(c.titre)+'</h3><span class="pill">'+esc(c.info)+'</span><span class="pill">'+esc(c.date)+'</span></div>'}).join(""):'<p class="sub">Aucune création pour l’instant.</p><button class="btn" onclick="go(\'generer\')">Créer ma première musique</button>');
-}
-function profil(){
-  V.innerHTML='<div class="kick">PROFIL</div><h1>Mes crédits</h1>'+
-  '<div class="card"><p class="sub">Solde</p><h1 style="color:var(--lime)">'+credits+' crédits</h1><p class="sub">'+COUT+' crédits = 1 création.</p></div>'+
-  '<div class="card"><h3>Recharger</h3><p class="sub">Pour acheter des crédits, écris-nous sur WhatsApp avec ton paiement Mobile Money.</p><a class="btn" style="text-align:center;text-decoration:none" href="https://wa.me/22995892887?text=Bonjour%20AVS%20PROD%2C%20je%20veux%20des%20cr%C3%A9dits" target="_blank">Acheter des crédits</a></div>';
-}
-maj();go("accueil");
-</script>
-</body>
-</html>
+R();
+</script></body></html>
